@@ -1,13 +1,12 @@
-
 <mat-card>
-<div>
-<span *ngFor="let dayz of days">
-
-      <strong>{{dayz.name | uppercase}} </strong>{{ dayz.dayStartAM | date : 'HH:mm' }}h  à {{ dayz.dayEndAM | date : 'HH:mm' }}h
-      et  {{ dayz.dayStartPM | date : 'HH:mm' }}h {{ dayz.dayEndPM | date : 'HH:mm' }}h
-<br>
-
-</span>
-</div>
-
+  <ul class="horaires">
+    <li *ngFor="let dayz of updatedSchedule">
+      <strong>{{ dayz.name | uppercase }} </strong
+      >{{ dayz.dayStartAM | date : "HH:mm" }}h -
+      {{ dayz.dayEndAM | date : "HH:mm" }}h et
+      {{ dayz.dayStartPM | date : "HH:mm" }}h -
+      {{ dayz.dayEndPM | date : "HH:mm" }}h
+      <br />
+    </li>
+  </ul>
 </mat-card>

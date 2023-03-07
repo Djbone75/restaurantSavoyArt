@@ -25,3 +25,6 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+insert into "Horaires" ("id", "name", "dayStartAM", "dayEndAM", "dayStartPM", "dayEndPM") values (1, 'lundi', '11:00:00', '16:00:00', '18:00:00', '22:00:00'), (2, 'mardi', '11:00:00', '16:00:00', '18:00:00', '22:00:00'),(3, 'mercredi', '11:00:00', '16:00:00', '18:00:00', '22:00:00'),(4, 'jeudi', '11:00:00', '16:00:00', '18:00:00', '22:00:00'),(5, 'vendredi', '11:00:00', '16:00:00', '18:00:00', '22:00:00'),(6, 'samedi', '11:00:00', '16:00:00', '18:00:00', '22:00:00'), (7, 'dimanche', '11:00:00', '16:00:00', '18:00:00', '22:00:00'),;
+npm install -g @angular/cli

@@ -1,7 +1,32 @@
-mat-form-field {
-  width: 100%;
+mat-card {
+  display: block;
+  width: 40%;
+  margin: auto;
+  margin: 2rem auto ;
+  padding: 1.5rem 0px;
 }
+
+mat-form-field {
+  display: block;
+  margin: auto;
+  width: 100%;
+  min-width: 150px;
+  max-width: 500px;
+}
+
+
 
 mat-spinner {
   margin: auto;
 }
+
+.button_centered {
+  display: block;
+  margin: auto;
+  width: 100%;
+  min-width: 150px;
+  max-width: 500px;
+  text-align: end;
+}
+
+

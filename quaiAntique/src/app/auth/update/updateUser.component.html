@@ -1,0 +1,68 @@
+<div class="container">
+  <div>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>{{ currentUser?.email }}</td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field>
+              <mat-label>Prénom</mat-label>
+              <input
+                matInput
+                name="firstname"
+                [ngModel]="currentUser?.firstname"
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Nom de Famille</mat-label>
+              <input
+                matInput
+                name="lastname"
+                [ngModel]="currentUser?.lastname"
+              />
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <mat-select
+                placeholder="number of guests"
+                name="averageGuests"
+                [ngModel]="currentUser?.averageGuests"
+              >
+                <mat-option
+                  *ngFor="let totalGuest of totalGuests"
+                  [value]="totalGuest"
+                >
+                  {{ totalGuest }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+      <br />
+
+      <mat-button-toggle-group
+        [ngModel]="currentUser?.allergies"
+        name="allergies"
+        multiple
+      >
+        <mat-button-toggle
+          style="font-size: 14px; height: 25px"
+          *ngFor="let allergy of allergies"
+          [value]="allergy"
+        >
+          {{ allergy }}
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <div>
+        <mat-dialog-actions>
+          <button mat-button backgroundColor="primary">SUBMIT</button>
+        </mat-dialog-actions>
+      </div>
+    </form>
+  </div>
+</div>

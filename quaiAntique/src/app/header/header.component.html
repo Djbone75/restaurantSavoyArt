@@ -1,20 +1,64 @@
-<mat-toolbar color="primary">
+<mat-toolbar>
   <span>
     <a routerLink="/">Quai Antique restaurant</a>
   </span>
   <span class="spacer"></span>
   <ul>
-    <li *ngIf="userIsAuthenticated">
-      <a mat-button routerLink="/create" routerLinkActive="mat-accent">New Post</a>
+    <li>
+      <a mat-button (click)="onClick()" routerLinkActive="mat-accent"
+        >Reservez</a
+      >
     </li>
     <li *ngIf="!userIsAuthenticated">
       <a mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a>
     </li>
     <li *ngIf="!userIsAuthenticated">
-      <a mat-button routerLink="/signup" routerLinkActive="mat-accent">Signup</a>
+      <a mat-button routerLink="/signup" routerLinkActive="mat-accent"
+        >Signup</a
+      >
     </li>
     <li *ngIf="userIsAuthenticated">
       <button mat-button (click)="onLogout()">Logout</button>
+    </li>
+
+    <li *ngIf="user && user.role == 'ADMIN'">
+      <button mat-button [matMenuTriggerFor]="menu">Administration</button>
+      <div class="browny">
+        <mat-menu #menu="matMenu">
+          <button
+            mat-menu-item
+            routerLink="/horairesUpdate"
+            routerLinkActive="mat-accent"
+          >
+            Horaires
+          </button>
+          <button mat-menu-item>Update Gallery</button>
+          <button
+            mat-menu-item
+            routerLink="/reservationList"
+            routerLinkActive="mat-accent"
+          >
+            reservations
+          </button>
+        </mat-menu>
+      </div>
+    </li>
+    <li class="button_icon">
+      <mat-icon *ngIf="user && user.role == 'USER'">how_to_reg</mat-icon>
+      <mat-icon *ngIf="!user">perm_identity</mat-icon>
+      <mat-icon
+        mat-button
+        *ngIf="user && user.role == 'ADMIN'"
+        [matBadge]="userIsAuthenticated && user.firstname == null ? '1' : ''"
+        matBadgeColor="warn"
+        matBadgeOverlap="true"
+        [matMenuTriggerFor]="userMenu"
+        >admin_panel_settings</mat-icon
+      ><mat-menu #userMenu="matMenu">
+        <button mat-menu-item routerLink="/updateUser">
+          mettez a jour vos informations
+        </button>
+      </mat-menu>
     </li>
   </ul>
 </mat-toolbar>

@@ -1,0 +1,42 @@
+:host {
+  display: block;
+  width: 40%;
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.horaires {
+  font-size: small;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  line-height: normal;
+}
+.horaires-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 2rem;
+  margin: auto;
+  cursor: pointer;
+
+  &:hover {
+    background-color: aliceblue;
+  }
+}
+mat-form-field {
+  margin-left: 1rem;
+  width: 5rem;
+}
+.active {
+  background-color: red;
+  &:hover {
+    background-color: red;
+  }
+}
+
+.backGrey {
+  background-color: bisque;
+}
+button {
+  background-color: bisque;
+}
