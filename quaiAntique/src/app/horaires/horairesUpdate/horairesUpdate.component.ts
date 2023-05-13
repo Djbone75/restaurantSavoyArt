@@ -32,7 +32,7 @@ export class HorairesUpdateComponent implements OnInit, AfterViewInit {
     'samedi',
     'dimanche',
   ];
-  hoursAM: number[] = [11, 12, 13, 14, 15, 16];
+  hoursAM: number[] = [11, 12, 13, 14, 15, 16, 17];
   hoursPM: number[] = [0, 18, 19, 20, 21, 22, 23];
   minutes: number[] = [0, 15, 30, 45];
 

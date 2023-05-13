@@ -7,4 +7,16 @@ mat-button-toggle {
 
 mat-dialog-content {
   padding: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.close-modal {
+  position: relative;
+  right: -1.5rem;
+  top: -1.5rem;
+  border: 1px solid black;
+}
+.form_reservation {
+  text-align: center;
 }

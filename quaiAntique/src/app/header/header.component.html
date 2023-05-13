@@ -1,16 +1,17 @@
 <mat-toolbar>
-  <span>
-    <a routerLink="/">Quai Antique restaurant</a>
-  </span>
-  <span class="spacer"></span>
   <ul>
+    <a mat-button class="logo" id="logo" routerLink="/">
+      <span class="logo--letter">Q</span>
+    </a>
     <li>
-      <a mat-button (click)="onClick()" routerLinkActive="mat-accent"
-        >Reservez</a
-      >
+      <button mat-button (click)="onClick()" routerLinkActive="mat-accent">
+        Reservez
+      </button>
     </li>
     <li *ngIf="!userIsAuthenticated">
-      <a mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a>
+      <button mat-button routerLink="/login" routerLinkActive="mat-accent">
+        Login
+      </button>
     </li>
     <li *ngIf="!userIsAuthenticated">
       <a mat-button routerLink="/signup" routerLinkActive="mat-accent"
@@ -23,28 +24,37 @@
 
     <li *ngIf="user && user.role == 'ADMIN'">
       <button mat-button [matMenuTriggerFor]="menu">Administration</button>
-      <div class="browny">
-        <mat-menu #menu="matMenu">
-          <button
-            mat-menu-item
-            routerLink="/horairesUpdate"
-            routerLinkActive="mat-accent"
-          >
-            Horaires
-          </button>
-          <button mat-menu-item>Update Gallery</button>
-          <button
-            mat-menu-item
-            routerLink="/reservationList"
-            routerLinkActive="mat-accent"
-          >
-            reservations
-          </button>
-        </mat-menu>
-      </div>
+
+      <mat-menu #menu="matMenu">
+        <a
+          mat-menu-item
+          routerLink="/horairesUpdate"
+          routerLinkActive="mat-accent"
+        >
+          Horaires
+        </a>
+        <a mat-menu-item routerLink="/gallery" routerLinkActive="mat-accent">
+          Update Gallery
+        </a>
+        <a
+          mat-menu-item
+          routerLink="/reservationList"
+          routerLinkActive="mat-accent"
+        >
+          reservations
+        </a>
+      </mat-menu>
     </li>
-    <li class="button_icon">
-      <mat-icon *ngIf="user && user.role == 'USER'">how_to_reg</mat-icon>
+    <li class="button_icon browny">
+      <mat-icon
+        mat-button
+        *ngIf="user && user.role == 'USER'"
+        [matBadge]="userIsAuthenticated && user.firstname == null ? '1' : ''"
+        matBadgeColor="warn"
+        matBadgeOverlap="true"
+        [matMenuTriggerFor]="userMenu"
+        >how_to_reg</mat-icon
+      >
       <mat-icon *ngIf="!user">perm_identity</mat-icon>
       <mat-icon
         mat-button

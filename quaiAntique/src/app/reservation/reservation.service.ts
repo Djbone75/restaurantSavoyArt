@@ -4,6 +4,8 @@ import { reservation } from 'src/models/reservation.model';
 import { reservationUser } from 'src/models/reservationUser.model';
 import { AuthService } from '../auth/auth.service';
 import { Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
 @Injectable({ providedIn: 'root' })
 export class reservationService {
   currentUser = this.authService.getUser();
@@ -17,7 +19,7 @@ export class reservationService {
 
   getReservationUser() {
     return this.http.get<{ reservations: reservationUser[] }>(
-      'http://localhost:3000/reservations/user/'
+      environment.apiUrl + '/reservations/user/'
     );
   }
   getReservationSub() {
@@ -26,14 +28,14 @@ export class reservationService {
 
   getReservation() {
     return this.http.get<{ reservations: reservation[] }>(
-      'http://localhost:3000/reservations/'
+      environment.apiUrl + '/reservations/'
     );
   }
 
   postUserReservation(reservation: reservation) {
     this.http
       .post<reservation>(
-        'http://localhost:3000/reservations/notregistered',
+        environment.apiUrl + '/reservations/notregistered',
         reservation
       )
       .subscribe((response) => {
@@ -42,7 +44,7 @@ export class reservationService {
   }
   postReservation(reservation: reservation) {
     this.http
-      .post<reservation>('http://localhost:3000/reservations/', reservation)
+      .post<reservation>(environment.apiUrl + '/reservations/', reservation)
       .subscribe((response) => {
         console.log('reservation effectuée : ', response);
       });

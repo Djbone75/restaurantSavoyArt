@@ -1,3 +1,5 @@
+@import "./styles/variables.scss";
+
 ul {
   list-style: none;
   padding: 0;
@@ -6,4 +8,36 @@ ul {
 
 a {
   text-decoration: none;
+}
+
+mat-card {
+  text-align: center;
+  margin-top: 2rem;
+}
+mat-form-field {
+  margin: 0.5rem;
+}
+simple-snack-bar {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-family: $police-primary;
+  color: $color-warn;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100vw;
+}
+button {
+  border: 0;
+}
+.button--form {
+  background-color: $color-primary-light;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+  }
 }

@@ -13,10 +13,10 @@ datasource db {
 model User {
   id        String    @id @default(uuid())
   createdAt DateTime  @default(now())
-  email String @unique
-  password  String
-  firstname String?
-  lastname String?
+  email String @unique @db.VarChar(50)
+  password  String 
+  firstname String? @db.VarChar(50)
+  lastname String? @db.VarChar(50)
   averageGuests Int?
   allergies String[]
   role    Role?     @default(USER) 
@@ -25,11 +25,12 @@ model User {
 model Reservation {
   id        Int   @id @default(autoincrement())
   createdAt DateTime @default(now()) 
-  userName String
+  userName String 
   totalGuests Int @default(1)
   day    DateTime
   hour DateTime @db.Time()
   userId   String?
+  allergies String[]
   user     User?       @relation(fields: [userId], references: [id])
   
 }
@@ -51,16 +52,16 @@ model Allergies {
 }
 model Gallery {
   id        Int   @id @default(autoincrement())
-  title String
-  content String?
-  path String
+  title String @db.VarChar(25)
+  content String? @db.VarChar(100)
+  path String 
   createdAt DateTime @default(now()) 
   
 }
 model Menu {
   id        Int   @id @default(autoincrement())
-  title String
-  content String?
+  title String @db.VarChar(25)
+  content String? @db.VarChar(100)
   createdAt DateTime @default(now()) 
   
 }

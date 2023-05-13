@@ -1,5 +1,6 @@
 import express from 'express';
 const app = express();
+const path = require('path');
 
 import horaireRouter from './routes/schedule/schedule.router';
 import userRouter from './routes/user/user.router';
@@ -8,6 +9,7 @@ import reservationRouter from './routes/reservations/reservations.router';
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('static'));
+app.use('/images', express.static(path.join('images')));
 
 // main();
 // async function main(){
@@ -26,6 +28,7 @@ app.use((req, res, next) => {
 	);
 	next();
 });
+
 app.use('/user', userRouter);
 app.use('/horaires', horaireRouter);
 app.use('/gallery', galleryRouter);

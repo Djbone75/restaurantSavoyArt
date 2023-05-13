@@ -4,7 +4,9 @@ import { allergies } from 'src/models/allergies.array';
 import { AuthService } from '../auth.service';
 import { Subscription } from 'rxjs';
 import { user } from 'src/models/user.model';
-import { NgFor } from '@angular/common';
+
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   templateUrl: './updateUser.component.html',
@@ -12,10 +14,14 @@ import { NgFor } from '@angular/common';
 })
 export class updateUserComponent implements OnInit {
   allergies: string[] = allergies;
-  currentUser?: user | null;
+  currentUser = this.authService.getUser();
   private UserListenerSubs?: Subscription;
   totalGuests: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
   ngOnInit(): void {
     this.currentUser = this.authService.getUser();
     this.UserListenerSubs = this.authService
@@ -27,5 +33,8 @@ export class updateUserComponent implements OnInit {
   onSubmit(form: NgForm) {
     const updatedUser = form.value;
     this.authService.updateUser(updatedUser);
+    this.snackBar.open('utilisateur mis à jour', '', { duration: 2000 });
+
+    this.router.navigate(['']);
   }
 }

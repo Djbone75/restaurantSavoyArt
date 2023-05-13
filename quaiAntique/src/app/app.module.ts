@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatInputModule } from '@angular/material/input';
@@ -18,19 +18,24 @@ import { MatListModule } from '@angular/material/list';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppComponent } from './app.component';
 import { ReservationComponent } from './reservation/reservationUpdate/reservation.component';
 import { HeaderComponent } from './header/header.component';
-import { HorairesComponent } from './horaires/horaires.list.ts/horaires.component';
+import { HorairesComponent } from './horaires/horairesList/horaires.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
-import { HorairesUpdateComponent } from './horaires/horaires.update.ts/horairesUpdate.component';
+import { HorairesUpdateComponent } from './horaires/horairesUpdate/horairesUpdate.component';
 import { HomeComponent } from './home/home.component';
 import { updateUserComponent } from './auth/update/updateUser.component';
 import { ReservationListComponent } from './reservation/reservationList/reservationList.component';
+import { GalleryUpdateComponent } from './gallery/galleryUpdate/galleryUpdate.component';
+import { GalleryListComponent } from './gallery/galleryList/galleryList.component';
 
 @NgModule({
   declarations: [
@@ -44,11 +49,14 @@ import { ReservationListComponent } from './reservation/reservationList/reservat
     HomeComponent,
     updateUserComponent,
     ReservationListComponent,
+    GalleryUpdateComponent,
+    GalleryListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     MatInputModule,
     MatCardModule,
     MatButtonModule,
@@ -65,6 +73,9 @@ import { ReservationListComponent } from './reservation/reservationList/reservat
     MatBadgeModule,
     MatButtonToggleModule,
     MatDialogModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSnackBarModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

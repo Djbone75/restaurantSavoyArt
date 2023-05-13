@@ -5,6 +5,9 @@ import { reservationUser } from 'src/models/reservationUser.model';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { allergies } from 'src/models/allergies.array';
+import { user } from 'src/models/user.model';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-reservation',
@@ -14,7 +17,9 @@ import { allergies } from 'src/models/allergies.array';
 export class ReservationComponent implements OnInit, OnDestroy {
   constructor(
     private reservationService: reservationService,
-    private authService: AuthService
+    private authService: AuthService,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
     this.today = new Date();
     this.twoWeeks = new Date();
@@ -24,6 +29,7 @@ export class ReservationComponent implements OnInit, OnDestroy {
     });
   }
   private reservationSub?: Subscription;
+  private userSub?: Subscription;
   hour: number = 0;
   today: Date;
   twoWeeks: Date;
@@ -97,7 +103,9 @@ export class ReservationComponent implements OnInit, OnDestroy {
       .subscribe((reservations: reservationUser[]) => {
         this.reservations = reservations;
       });
-
+    this.userSub = this.authService.getUserListener().subscribe((user) => {
+      this.currentUser = user;
+    });
     this.reservationForm?.enabled == false;
   }
   ngOnDestroy() {
@@ -114,8 +122,15 @@ export class ReservationComponent implements OnInit, OnDestroy {
     );
     if (this.currentUser) {
       this.reservationService.postReservation(newReservation);
+      this.snackBar.open('reservation effectuée', '', { duration: 1000 });
+      this.dialog.closeAll();
     } else {
+      if (newReservation.allergies == null) {
+        newReservation.allergies = undefined;
+      }
       this.reservationService.postUserReservation(newReservation);
+      this.snackBar.open('reservation effectuée', '', { duration: 1000 });
+      this.dialog.closeAll();
     }
   }
 

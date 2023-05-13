@@ -1,13 +1,10 @@
-:host {
-  display: block;
-  width: 40%;
-  margin: 1rem auto;
-  text-align: center;
+@import "../../../styles/variables.scss";
+.card_horaires {
+  max-width: 34rem;
 }
-
 .horaires {
   font-size: small;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: $police-tertiary;
   line-height: normal;
 }
 .horaires-item {
@@ -34,9 +31,11 @@ mat-form-field {
   }
 }
 
-.backGrey {
-  background-color: bisque;
-}
-button {
-  background-color: bisque;
+.mat-card-header {
+  width: 100%;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
 }

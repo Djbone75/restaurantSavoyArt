@@ -23,7 +23,7 @@ export const createNewUser = async (req, res, next) => {
 
 export const updateUser = async (req, res) => {
 	try {
-		const userUpdate = await prisma.user.update({
+		const user = await prisma.user.update({
 			where: { email: req.userData.email },
 			data: {
 				averageGuests: req.body.averageGuests,
@@ -32,9 +32,7 @@ export const updateUser = async (req, res) => {
 				allergies: req.body.allergies,
 			},
 		});
-		const user = await prisma.user.findUnique({
-			where: { email: req.userData.email },
-		});
+		console.log(user);
 		res.status(200).json({
 			user,
 		});
@@ -56,7 +54,6 @@ export const login = async (req, res) => {
 	const isValid = await comparePasswords(req.body.password, user.password);
 
 	if (!isValid) {
-		res.status(401);
 		res.json({ message: 'token invalide' });
 		return;
 	}
@@ -75,4 +72,22 @@ export const sendUserData = async (req, res) => {
 		return res.status(401).json({ message: 'no user found' });
 	}
 	res.json({ user });
+};
+export const makeAdmin = async (req, res) => {
+	try {
+		const user = await prisma.user.update({
+			where: { email: 'admin@admin.com' },
+			data: {
+				role: 'ADMIN',
+			},
+		});
+
+		res.status(200).json({
+			message: 'vous êtes maintenant un admin',
+		});
+	} catch (err) {
+		res.status(401).json({
+			message: 'something goes wrong' + err,
+		});
+	}
 };

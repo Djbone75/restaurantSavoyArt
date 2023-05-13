@@ -1,3 +1,4 @@
+@import "../../../styles/variables.scss";
 mat-button-toggle {
   display: flex;
   min-height: 2.3rem;
@@ -6,5 +7,12 @@ mat-button-toggle {
 }
 button {
   margin-top: 1rem;
-  background-color: rgb(245, 191, 126);
+  background-color: $color-primary;
+}
+.container {
+  width: 100vw;
+  margin: 1.5rem;
+}
+mat-form-field {
+  margin: 0.5rem;
 }

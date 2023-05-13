@@ -2,7 +2,16 @@ import { PrismaClient } from '.prisma/client';
 const prisma = new PrismaClient();
 
 export const getReservations = async (req, res) => {
-	const reservations = await prisma.reservation.findMany({});
+	const reservations = await prisma.reservation.findMany({
+		orderBy: [
+			{
+				day: 'asc',
+			},
+			{
+				hour: 'asc',
+			},
+		],
+	});
 	res.status(200).json({
 		reservations,
 	});
@@ -29,6 +38,7 @@ export const createReservation = async (req, res, next) => {
 			totalGuests: parseInt(req.body.totalGuests),
 			userName: req.body.userName,
 			userId: req.userData.userId,
+			allergies: req.body.allergy,
 		},
 	});
 
@@ -41,6 +51,7 @@ export const createSimpleReservation = async (req, res, next) => {
 			hour: req.body.hour,
 			totalGuests: parseInt(req.body.totalGuests),
 			userName: req.body.userName,
+			allergies: req.body.allergy || undefined,
 		},
 	});
 	res.json({ reservation });

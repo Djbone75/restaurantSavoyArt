@@ -1,0 +1,93 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Mettez a jour Votre gallerie d'image</mat-card-title>
+    <mat-card-subtitle>taille minimum : 400*600px</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form (submit)="onSavePost()" [formGroup]="form">
+      <div>
+        <mat-form-field appearance="fill">
+          <input
+            matInput
+            type="text"
+            name="title"
+            placeholder="entrez le titre"
+            formControlName="title"
+          />
+          <mat-error *ngIf="form.get('title')?.invalid"
+            >Titre obligatoire</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="field__image">
+        Ajoutez une image {{ fileName }}
+        <button
+          color="warn"
+          class="upload-btn"
+          type="button"
+          (click)="fileSelector.click()"
+        >
+          <mat-icon class="icon__upload">file_present</mat-icon>
+        </button>
+
+        <br />
+        <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview">
+          <img [src]="imagePreview" [alt]="fileName" />
+        </div>
+
+        <input
+          type="file"
+          accept=".jpg, .png"
+          #fileSelector
+          (change)="onImageSelected($event)"
+        />
+      </div>
+      <mat-form-field appearance="fill">
+        <input
+          class="content"
+          placeholder="entrez le contenu"
+          matInput
+          type="textArea"
+          name="content"
+          rows="4"
+          formControlName="content"
+        />
+      </mat-form-field>
+      <div>
+        <button class="mat-button button--form" type="submit">Save Post</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <div class="gallery_table">
+    <div *ngFor="let gallery of updatedGallery; let i = index">
+      <div
+        class="row"
+        *ngIf="i < pageNumber * 10 + 1 && i > pageNumber * 10 - 9"
+      >
+        <div class="element">{{ gallery.title }}</div>
+        <div class="element">{{ gallery.content }}</div>
+
+        <div
+          class="element updatedImage"
+          [style.background-image]="'url(' + gallery.path + ')'"
+        ></div>
+
+        <div class="element">
+          <button>
+            <mat-icon class="icon__trash" (click)="deleteHandle(gallery.id)"
+              >delete</mat-icon
+            >
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-paginator
+    [length]="100"
+    [pageSize]="10"
+    (page)="handlePageEvent($event)"
+  >
+  </mat-paginator>
+</mat-card>

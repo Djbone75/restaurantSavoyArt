@@ -5,10 +5,11 @@ import { AdminGuard } from './auth/admin.guard ';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { ReservationComponent } from './reservation/reservationUpdate/reservation.component';
-import { HorairesUpdateComponent } from './horaires/horaires.update.ts/horairesUpdate.component';
+import { HorairesUpdateComponent } from './horaires/horairesUpdate/horairesUpdate.component';
 import { HomeComponent } from './home/home.component';
 import { updateUserComponent } from './auth/update/updateUser.component';
 import { ReservationListComponent } from './reservation/reservationList/reservationList.component';
+import { GalleryUpdateComponent } from './gallery/galleryUpdate/galleryUpdate.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'horairesUpdate', component: HorairesUpdateComponent },
   { path: 'updateUser', component: updateUserComponent },
   { path: 'reservationList', component: ReservationListComponent },
+  { path: 'gallery', component: GalleryUpdateComponent },
 ];
 
 @NgModule({

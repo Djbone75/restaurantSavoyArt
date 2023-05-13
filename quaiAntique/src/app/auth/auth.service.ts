@@ -4,11 +4,14 @@ import { Router, UrlSerializer } from '@angular/router';
 import { Subject } from 'rxjs';
 import { user } from 'src/models/user.model';
 import { AuthData } from './auth-data.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { environment } from '../../environments/environment';
 
+const BACKEND_URL = environment.apiUrl + '/user/';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private isAuthenticated = false;
-  private token: string = '';
+  private token?: string;
 
   private userData?: string;
   private user?: user | null;
@@ -16,7 +19,11 @@ export class AuthService {
   private authStatusListener = new Subject<boolean>();
   private userListener = new Subject<user | null>();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
 
   getToken() {
     return this.token;
@@ -40,36 +47,50 @@ export class AuthService {
   createUser(email: string, password: string) {
     const authData: AuthData = { email: email, password: password };
     this.http
-      .post('http://localhost:3000/user/register', authData)
-      .subscribe((response) => {});
+      .post(BACKEND_URL + '/register', authData)
+      .subscribe((response) => {
+        this.snackBar.open('merci de vous êtres inscrit', '', {
+          duration: 2000,
+        });
+        this.router.navigate(['/']);
+      });
   }
 
   login(email: string, password: string) {
     const authData: AuthData = { email: email, password: password };
-    this.http
-      .post<{ token: string; user: user }>(
-        'http://localhost:3000/user/login',
-        authData
-      )
-      .subscribe((response) => {
-        const token = response.token;
-        const user = response.user;
-        this.token = token;
-        this.user = user;
+    try {
+      this.http
+        .post<{ token: string; user: user }>(BACKEND_URL + '/login', authData)
+        .subscribe((response) => {
+          const token = response.token;
+          const user = response.user;
+          this.token = token;
+          this.user = user;
 
-        if (token) {
-          this.isAuthenticated = true;
-          this.authStatusListener.next(true);
-          this.userListener.next(this.user);
-
-          this.saveAuthData(token, user);
-          this.router.navigate(['/']);
-        }
+          if (token) {
+            this.isAuthenticated = true;
+            this.authStatusListener.next(true);
+            this.userListener.next(this.user);
+            console.log('?');
+            this.saveAuthData(token, user);
+            this.router.navigate(['/']);
+          } else {
+            this.snackBar.open('utilisateur non trouvé', '', {
+              duration: 2000,
+            });
+            this.router.navigate(['/login']);
+          }
+        });
+    } catch {
+      this.snackBar.open('utilisateur non trouvé', '', {
+        duration: 2000,
       });
+      this.router.navigate(['/']);
+    }
   }
 
   retrieveUser() {
-    return this.http.get<user>('http://localhost:3000/user/user');
+    return this.http.get<user>(BACKEND_URL + '/user');
   }
 
   logout() {
@@ -123,8 +144,9 @@ export class AuthService {
 
   updateUser(updateUser: user) {
     this.http
-      .put<{ user: user }>('http://localhost:3000/user/user', updateUser)
+      .put<{ user: user }>(BACKEND_URL + '/user', updateUser)
       .subscribe((data) => {
+        this.user = data.user;
         this.userListener.next(data.user);
       });
   }

@@ -1,101 +1,97 @@
-<div>
-  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-    <div>
-      <mat-form-field class="reservation">
-        <mat-label>First name</mat-label>
-        <input matInput name="userName" [ngModel]="currentUser?.firstname" />
-      </mat-form-field>
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form_reservation">
+  <div>
+    <mat-form-field>
+      <mat-label>nom de Famille</mat-label>
+      <input matInput name="userName" [ngModel]="currentUser?.firstname" />
+    </mat-form-field>
 
-      <mat-form-field>
-        <mat-select
-          placeholder="number of guests"
-          name="totalGuests"
-          [ngModel]="currentUser?.averageGuests"
-        >
-          <mat-option
-            *ngFor="let totalGuest of totalGuests"
-            [value]="totalGuest"
-          >
-            {{ totalGuest }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <br />
-      <mat-form-field appearance="outline">
-        <input
-          matInput
-          [matDatepicker]="picker"
-          name="day"
-          [(ngModel)]="customDate"
-          placeholder="choisissez une date"
-          [min]="today"
-          [max]="twoWeeks"
-          (dateChange)="onChange(customDate)"
-        />
-
-        <mat-datepicker-toggle
-          matIconPrefix
-          [for]="picker"
-          [disabled]="false"
-        ></mat-datepicker-toggle>
-        <mat-datepicker
-          #picker
-          [disabled]="false"
-          [startAt]="today"
-        ></mat-datepicker>
-      </mat-form-field>
-    </div>
-
-    <div>
-      <br />
-      Matin : {{ customReservationAM }} places de libres - Après midi :
-      {{ customReservationPM }} places de libres -
-      <br />
-      <mat-form-field>
-        <mat-select placeholder="Hour" name="hour" [(ngModel)]="hour">
-          <mat-option *ngFor="let hour of hours" [value]="hour">
-            {{ hour }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-select placeholder="Minute" name="minute" ngModel>
-          <mat-option *ngFor="let minute of minutes" [value]="minute">
-            {{ minute }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <mat-button-toggle-group
-      [ngModel]="currentUser?.allergies"
-      name="allergy"
-      multiple
-    >
-      <mat-button-toggle
-        style="font-size: 14px; height: 25px"
-        *ngFor="let allergy of allergies"
-        [value]="allergy"
+    <mat-form-field>
+      <mat-select
+        placeholder="nombre d'invités"
+        name="totalGuests"
+        [ngModel]="currentUser?.averageGuests"
       >
-        {{ allergy }}
-      </mat-button-toggle>
-    </mat-button-toggle-group>
+        <mat-option *ngFor="let totalGuest of totalGuests" [value]="totalGuest">
+          {{ totalGuest }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-dialog-close class="close-modal">X</button>
+    <br />
+    <mat-form-field appearance="outline">
+      <input
+        matInput
+        [matDatepicker]="picker"
+        name="day"
+        [(ngModel)]="customDate"
+        placeholder="choisissez une date"
+        [min]="today"
+        [max]="twoWeeks"
+        (dateChange)="onChange(customDate)"
+      />
 
-    <div class="reservation">
-      <mat-dialog-actions>
-        <button
-          mat-button
-          color="primary"
-          [disabled]="
-            (hour <= 15 && customReservationAM <= 0) ||
-            (hour >= 15 && customReservationPM <= 0) ||
-            hour == 0
-          "
-        >
-          SUBMIT
-        </button>
-      </mat-dialog-actions>
-    </div>
-  </form>
-</div>
+      <mat-datepicker-toggle
+        matIconPrefix
+        [for]="picker"
+        [disabled]="false"
+      ></mat-datepicker-toggle>
+      <mat-datepicker
+        #picker
+        [disabled]="false"
+        [startAt]="today"
+      ></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <br />
+    Matin : {{ customReservationAM }} places de libres - Après midi :
+    {{ customReservationPM }} places de libres -
+    <br />
+    <mat-form-field>
+      <mat-select placeholder="heure" name="hour" [(ngModel)]="hour">
+        <mat-option *ngFor="let hour of hours" [value]="hour">
+          {{ hour }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="minutes" name="minute" ngModel>
+        <mat-option *ngFor="let minute of minutes" [value]="minute">
+          {{ minute }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <mat-button-toggle-group
+    [ngModel]="currentUser?.allergies"
+    name="allergy"
+    multiple
+  >
+    <mat-button-toggle
+      style="font-size: 14px; height: 25px"
+      *ngFor="let allergy of allergies"
+      [value]="allergy"
+    >
+      {{ allergy }}
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <div>
+    <mat-dialog-actions>
+      <button
+        mat-button
+        class="button--form"
+        [disabled]="
+          (hour <= 15 && customReservationAM <= 0) ||
+          (hour >= 15 && customReservationPM <= 0) ||
+          hour == 0 ||
+          minutes == undefined
+        "
+      >
+        je réserve
+      </button>
+    </mat-dialog-actions>
+  </div>
+</form>
