@@ -1,7 +1,7 @@
 <mat-toolbar>
   <ul>
     <a mat-button class="logo" id="logo" routerLink="/">
-      <span class="logo--letter">Q</span>
+      <span class="logo__letter">Q</span>
     </a>
     <li>
       <button mat-button (click)="onClick()" routerLinkActive="mat-accent">
@@ -45,7 +45,7 @@
         </a>
       </mat-menu>
     </li>
-    <li class="button_icon browny">
+    <li class="button__icon">
       <mat-icon
         mat-button
         *ngIf="user && user.role == 'USER'"

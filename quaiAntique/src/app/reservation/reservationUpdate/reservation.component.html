@@ -1,4 +1,4 @@
-<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form_reservation">
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form__reservation">
   <div>
     <mat-form-field>
       <mat-label>nom de Famille</mat-label>
@@ -82,7 +82,7 @@
     <mat-dialog-actions>
       <button
         mat-button
-        class="button--form"
+        class="button__form"
         [disabled]="
           (hour <= 15 && customReservationAM <= 0) ||
           (hour >= 15 && customReservationPM <= 0) ||

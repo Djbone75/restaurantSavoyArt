@@ -1,8 +1,8 @@
 Bienvenue sur Quai Antique restaurant, site créé grâce au soutient de formation studi.fr
 
 Cette application est divisé en deux : une appli pour le front end avec angular, une autre pour le backend en node.js.
-cd backend puis npm init pour le backend
-cd.. puis cd quaiAntique npm init pour installer les modules.
+cd backend puis npm install pour le backend
+cd.. puis cd quaiAntique npm install pour installer les modules.
 
 Pour installer l'application
 1: cd backend puis installer le client prisma qui va s'occuper de faire la migration de la base de donnée

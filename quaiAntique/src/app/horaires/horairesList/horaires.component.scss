@@ -6,3 +6,64 @@
   font-family: $police-tertiary;
   line-height: normal;
 }
+/*
+exemple du design
+.police--1 {
+  font-size: large;
+  font-family: $police-primary;
+  color: $color-primary-light;
+  font-size: xx-large;
+}
+.police--2 {
+  font-size: xx-large;
+  font-family: $police-secondary;
+  color: $color-secondary-light;
+}
+.police--3 {
+  font-size: xx-large;
+  font-family: $police-tertiary;
+  color: $color-primary-light;
+}
+.design {
+  display: flex;
+  flex-direction: column;
+  width: 100wh;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.separator {
+  margin-bottom: 1rem;
+  min-height: 2.5rem;
+  width: 30rem;
+  &--1 {
+    background-color: $color-primary;
+  }
+  &--2 {
+    background-color: $color-primary-dark;
+  }
+  &--3 {
+    background-color: $color-primary-light;
+  }
+  &--4 {
+    background-color: $color-secondary-dark;
+  }
+  &--5 {
+    background-color: $color-secondary-light;
+  }
+
+  &--6 {
+    background-color: $color-grey-dark;
+  }
+  &--7 {
+    background-color: $color-grey-light-1;
+  }
+  &--8 {
+    background-color: $color-warn;
+  }
+}
+*/
