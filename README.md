@@ -1,4 +1,4 @@
-Bienvenue sur Quai Antique restaurant, site créé grâce au soutient de formation studi.fr
+Bienvenue sur Quai Antique restaurant, site créé grâce au soutien de formation studi.fr
 
 Cette application est divisé en deux : une appli pour le front end avec angular, une autre pour le backend en node.js.
 cd backend puis npm install pour le backend
