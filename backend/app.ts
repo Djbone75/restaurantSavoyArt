@@ -7,6 +7,7 @@ import userRouter from './routes/user/user.router';
 import galleryRouter from './routes/gallery/gallery.router';
 import reservationRouter from './routes/reservations/reservations.router';
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('static'));
 app.use('/images', express.static(path.join('images')));
